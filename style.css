@@ -239,8 +239,8 @@ nav {
 
 .profile-img {
     /* Base size for mobile first */
-    width: 320px;
-    height: 430px;
+    width: 420px;
+    height: 530px;
     object-fit: contain;
     display: block;
     position: relative;
@@ -2095,4 +2095,5 @@ section {
         font-size: 1.2rem;
     }
 }
+
 
