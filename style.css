@@ -200,112 +200,468 @@ nav {
     left: 100%;
 }
 
+
+
+
+
+
 .hero-image {
     flex: 1;
     display: flex;
     justify-content: center;
+    align-items: center;
     position: relative;
 }
 
-.image-container {
+.image-layout {
     position: relative;
     width: 400px;
     height: 500px;
-    overflow: hidden;
-    border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    transform: perspective(1000px) rotateY(-5deg) rotateX(5deg);
-    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.image-container:hover {
-    transform: perspective(1000px) rotateY(0) rotateX(0) scale(1.05);
-    box-shadow: 0 30px 60px rgba(108, 99, 255, 0.3);
+/* Main Image - Full Display */
+.image-main {
+    position: relative;
+    z-index: 20;
+    filter: 
+        drop-shadow(0 30px 60px rgba(108, 99, 255, 0.4))
+        contrast(1.1)
+        saturate(1.05);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    animation: imageBreath 12s ease-in-out infinite;
 }
 
 .profile-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
+    width: 320px;
+    height: 420px;
+    object-fit: contain;
+    display: block;
+    position: relative;
+    z-index: 25;
+    mix-blend-mode: normal;
+    transition: all 0.6s ease;
+    clip-path: polygon(
+        0% 0%, 100% 0%, 100% 100%, 0% 100%
+    );
 }
 
-.image-container:hover .profile-img {
-    transform: scale(1.1);
+@keyframes imageBreath {
+    0%, 100% {
+        transform: 
+            scale(1) 
+            translateY(0px) 
+            rotate(0deg);
+        filter: 
+            drop-shadow(0 30px 60px rgba(108, 99, 255, 0.4))
+            contrast(1.1)
+            saturate(1.05);
+    }
+    33% {
+        transform: 
+            scale(1.02) 
+            translateY(-8px) 
+            rotate(0.3deg);
+        filter: 
+            drop-shadow(0 35px 70px rgba(108, 99, 255, 0.5))
+            contrast(1.15)
+            saturate(1.1);
+    }
+    66% {
+        transform: 
+            scale(0.98) 
+            translateY(5px) 
+            rotate(-0.2deg);
+        filter: 
+            drop-shadow(0 25px 55px rgba(108, 99, 255, 0.35))
+            contrast(1.08)
+            saturate(1.02);
+    }
 }
 
-.image-border {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 3px solid var(--primary);
-    border-radius: 20px;
-    opacity: 0;
-    transition: opacity 0.5s ease, transform 0.5s ease;
+.image-main:hover {
     transform: scale(1.05);
+    filter: 
+        drop-shadow(0 40px 80px rgba(108, 99, 255, 0.6))
+        contrast(1.2)
+        saturate(1.15);
 }
 
-.image-container:hover .image-border {
-    opacity: 1;
-    transform: scale(1);
+/* Liquid Layers - Organic Shapes */
+.liquid-layer {
+    position: absolute;
+    z-index: 5;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    opacity: 0.15;
+    mix-blend-mode: overlay;
+    animation: liquidFlow 20s ease-in-out infinite;
+    border-radius: 40% 60% 60% 40% / 50% 40% 60% 50%;
 }
 
-.floating-elements {
+.liquid-1 {
+    width: 350px;
+    height: 450px;
+    top: 5%;
+    left: 5%;
+    animation-delay: 0s;
+    background: linear-gradient(135deg, var(--primary), transparent 70%);
+}
+
+.liquid-2 {
+    width: 380px;
+    height: 480px;
+    top: 2%;
+    left: 3%;
+    animation-delay: 7s;
+    background: linear-gradient(225deg, var(--secondary), transparent 70%);
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+}
+
+.liquid-3 {
+    width: 330px;
+    height: 430px;
+    top: 8%;
+    left: 7%;
+    animation-delay: 14s;
+    background: linear-gradient(315deg, #8b85ff, transparent 70%);
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+}
+
+@keyframes liquidFlow {
+    0%, 100% {
+        transform: 
+            translate(0, 0) 
+            rotate(0deg) 
+            scale(1);
+        border-radius: 40% 60% 60% 40% / 50% 40% 60% 50%;
+        opacity: 0.15;
+    }
+    25% {
+        transform: 
+            translate(15px, -20px) 
+            rotate(5deg) 
+            scale(1.1);
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        opacity: 0.2;
+    }
+    50% {
+        transform: 
+            translate(-10px, 15px) 
+            rotate(-3deg) 
+            scale(0.95);
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+        opacity: 0.1;
+    }
+    75% {
+        transform: 
+            translate(20px, 10px) 
+            rotate(2deg) 
+            scale(1.05);
+        border-radius: 50% 50% 50% 50% / 60% 40% 60% 40%;
+        opacity: 0.18;
+    }
+}
+
+/* Energy Waves */
+.energy-wave {
+    position: absolute;
+    z-index: 10;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    opacity: 0;
+    animation: wavePulse 6s ease-in-out infinite;
+    mix-blend-mode: screen;
+}
+
+.wave-1 {
+    width: 400px;
+    height: 3px;
+    top: 20%;
+    left: 0;
+    animation-delay: 0s;
+    filter: blur(1px);
+}
+
+.wave-2 {
+    width: 380px;
+    height: 2px;
+    top: 50%;
+    left: 10px;
+    animation-delay: 2s;
+    filter: blur(0.5px);
+}
+
+.wave-3 {
+    width: 420px;
+    height: 4px;
+    top: 80%;
+    left: -10px;
+    animation-delay: 4s;
+    filter: blur(1.5px);
+}
+
+@keyframes wavePulse {
+    0%, 100% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+    }
+    50% {
+        opacity: 0.4;
+    }
+    90% {
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* Holographic Overlay */
+.holographic-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    z-index: 15;
+    background: 
+        linear-gradient(125deg, transparent 30%, rgba(108, 99, 255, 0.1) 50%, transparent 70%),
+        linear-gradient(45deg, transparent 40%, rgba(139, 133, 255, 0.05) 60%, transparent 80%);
+    mix-blend-mode: overlay;
+    opacity: 0.3;
+    animation: hologramShift 8s ease-in-out infinite;
+}
+
+@keyframes hologramShift {
+    0%, 100% {
+        background-position: 0% 0%, 100% 100%;
+        opacity: 0.3;
+    }
+    50% {
+        background-position: 100% 100%, 0% 0%;
+        opacity: 0.5;
+    }
+}
+
+/* Digital Particles */
+.digital-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 18;
     pointer-events: none;
 }
 
-.element {
+.particle {
     position: absolute;
-    width: 50px;
-    height: 50px;
-    background-color: var(--primary);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.5rem;
-    box-shadow: 0 5px 15px rgba(108, 99, 255, 0.4);
-    animation: float 6s ease-in-out infinite;
-    opacity: 0.8;
+    background: var(--primary);
+    border-radius: 1px;
+    opacity: 0;
+    animation: particleFloat 15s linear infinite;
 }
 
-.element-1 {
-    top: 10%;
-    left: -20px;
+.particle-1 {
+    width: 3px;
+    height: 3px;
+    top: 15%;
+    left: 10%;
     animation-delay: 0s;
 }
 
-.element-2 {
-    top: 40%;
-    right: -20px;
-    animation-delay: 1.5s;
-}
-
-.element-3 {
-    bottom: 20%;
-    left: -20px;
+.particle-2 {
+    width: 2px;
+    height: 2px;
+    top: 65%;
+    right: 15%;
     animation-delay: 3s;
 }
 
-.element-4 {
-    bottom: 10%;
-    right: -20px;
-    animation-delay: 4.5s;
+.particle-3 {
+    width: 4px;
+    height: 1px;
+    bottom: 25%;
+    left: 20%;
+    animation-delay: 6s;
 }
 
-@keyframes float {
-    0% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(10deg); }
-    100% { transform: translateY(0) rotate(0deg); }
+.particle-4 {
+    width: 1px;
+    height: 4px;
+    top: 35%;
+    right: 25%;
+    animation-delay: 9s;
 }
+
+.particle-5 {
+    width: 2px;
+    height: 2px;
+    bottom: 15%;
+    right: 10%;
+    animation-delay: 12s;
+}
+
+@keyframes particleFloat {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+    }
+    30% {
+        transform: translate(50px, -30px) rotate(90deg);
+        opacity: 0.6;
+    }
+    60% {
+        transform: translate(100px, 20px) rotate(180deg);
+        opacity: 0.4;
+    }
+    90% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate(150px, -50px) rotate(270deg);
+        opacity: 0;
+    }
+}
+
+/* Light Trails */
+.light-trail {
+    position: absolute;
+    z-index: 12;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    opacity: 0;
+    animation: trailFlow 12s ease-in-out infinite;
+    mix-blend-mode: plus-lighter;
+}
+
+.trail-1 {
+    width: 200px;
+    height: 1px;
+    top: 30%;
+    left: -50px;
+    animation-delay: 0s;
+    filter: blur(2px);
+}
+
+.trail-2 {
+    width: 150px;
+    height: 2px;
+    bottom: 40%;
+    right: -50px;
+    animation-delay: 4s;
+    filter: blur(1px);
+}
+
+.trail-3 {
+    width: 180px;
+    height: 1px;
+    top: 70%;
+    left: -30px;
+    animation-delay: 8s;
+    filter: blur(3px);
+}
+
+@keyframes trailFlow {
+    0%, 100% {
+        transform: translateX(-100px) scaleX(0.5);
+        opacity: 0;
+    }
+    20% {
+        opacity: 0.7;
+        transform: translateX(100px) scaleX(1);
+    }
+    40% {
+        opacity: 0.3;
+        transform: translateX(200px) scaleX(0.8);
+    }
+    60% {
+        opacity: 0.5;
+        transform: translateX(300px) scaleX(1.2);
+    }
+    80% {
+        opacity: 0.2;
+        transform: translateX(400px) scaleX(0.6);
+    }
+    100% {
+        transform: translateX(500px) scaleX(0.3);
+        opacity: 0;
+    }
+}
+
+/* Interactive Enhancement */
+.image-layout:hover .liquid-layer {
+    opacity: 0.25;
+    animation-duration: 10s;
+}
+
+.image-layout:hover .energy-wave {
+    animation-duration: 4s;
+    opacity: 0.9;
+}
+
+.image-layout:hover .holographic-overlay {
+    opacity: 0.6;
+    animation-duration: 6s;
+}
+
+.image-layout:hover .particle {
+    animation-duration: 10s;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .image-layout {
+        width: 300px;
+        height: 400px;
+    }
+    
+    .profile-img {
+        width: 250px;
+        height: 330px;
+    }
+    
+    .liquid-layer {
+        transform: scale(0.8);
+    }
+    
+    .energy-wave,
+    .light-trail {
+        transform: scale(0.8);
+    }
+}
+
+@media (max-width: 480px) {
+    .image-layout {
+        width: 250px;
+        height: 350px;
+    }
+    
+    .profile-img {
+        width: 200px;
+        height: 280px;
+    }
+    
+    .liquid-layer {
+        transform: scale(0.6);
+    }
+    
+    .energy-wave,
+    .light-trail {
+        transform: scale(0.6);
+    }
+}
+
+
+
+
 
 /* Section Styling */
 section {
