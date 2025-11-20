@@ -239,8 +239,8 @@ nav {
 
 .profile-img {
     /* Base size for mobile first */
-    width: 280px;
-    height: 370px;
+    width: 320px;
+    height: 430px;
     object-fit: contain;
     display: block;
     position: relative;
@@ -255,40 +255,40 @@ nav {
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
     .profile-img {
-        width: 300px;
-        height: 395px;
+        width: 340px;
+        height: 425px;
     }
 }
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
     .profile-img {
-        width: 320px;
-        height: 420px;
+        width: 360px;
+        height: 460px;
     }
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
     .profile-img {
-        width: 340px;
-        height: 445px;
+        width: 370px;
+        height: 475px;
     }
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
     .profile-img {
-        width: 360px;
-        height: 470px;
+        width: 400px;
+        height: 510px;
     }
 }
 
 /* XXL devices (larger desktops, 1400px and up) */
 @media (min-width: 1400px) {
     .profile-img {
-        width: 380px;
-        height: 500px;
+        width: 420px;
+        height: 540px;
     }
 }
 
@@ -2095,3 +2095,4 @@ section {
         font-size: 1.2rem;
     }
 }
+
